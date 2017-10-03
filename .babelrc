@@ -1,6 +1,6 @@
 {
   "presets": [
-    ["env", {"targets": {"browsers": ["last 2 versions", "> 5%"], "node": 6}, "loose": true}],
+    ["env", {"targets": {"node": 8}}],
     "stage-0"
   ],
   "env": {
