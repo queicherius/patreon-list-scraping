@@ -1,0 +1,17 @@
+{
+  "name": "patreon-list-scraping",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "abc lint",
+    "build": "abc build",
+    "version": "abc build"
+  },
+  "dependencies": {
+    "puppeteer": "^0.11.0"
+  },
+  "devDependencies": {
+    "abc-environment": "^2.0.2"
+  }
+}
