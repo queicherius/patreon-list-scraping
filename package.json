@@ -1,7 +1,7 @@
 {
   "name": "patreon-list-scraping",
   "version": "1.0.2",
-  "main": "index.js",
+  "main": "build/index.js",
   "license": "MIT",
   "scripts": {
     "test": "abc lint",
