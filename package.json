@@ -1,7 +1,7 @@
 {
   "name": "patreon-list-scraping",
   "description": "Programmatically get the current Patreons (names, mails, pledges) of your account",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "src/index.js",
   "license": "MIT",
   "dependencies": {
