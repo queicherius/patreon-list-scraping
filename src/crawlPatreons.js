@@ -64,7 +64,10 @@ async function getBillingSchedules (authFetch) {
   debug(`parsed ${matches.length} billing schedules`)
 
   // Convert into a little nicer matches with full URLs
-  return matches.map(x => ({href: `https://www.patreon.com${x.sub[0]}`, text: x.sub[1]}))
+  const scheduleLinks = matches.map(x => ({href: `https://www.patreon.com${x.sub[0]}`, text: x.sub[1]}))
+
+  // Always return the list of current patreons
+  return [{href: 'https://www.patreon.com/manageRewardsList', text: 'Current'}].concat(scheduleLinks)
 }
 
 async function parsePatreonManager (authFetch, href) {
