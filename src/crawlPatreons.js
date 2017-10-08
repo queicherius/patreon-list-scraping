@@ -28,6 +28,12 @@ async function getAuthenticatedRequestHandler (options) {
     })
   })
 
+  // Check for errors
+  const content = await response.json()
+  if (content.errors) {
+    throw new Error(`Failed to log into patreon: (${content.errors[0].code_name}) ${content.errors[0].detail}`)
+  }
+
   // Parse the cookie header into something usable
   const cookies = response.headers._headers['set-cookie']
     .map(cookie => cookie.replace(/^(.*?); .+$/, '$1'))
