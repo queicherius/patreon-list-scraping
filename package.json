@@ -3,6 +3,9 @@
   "description": "Programmatically get the current Patreons (names, mails, pledges) of your account",
   "version": "2.0.2",
   "main": "src/index.js",
+  "scripts": {
+    "start": "DEBUG='patreon-list-scraping' node tests/index.js"
+  },
   "license": "MIT",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",

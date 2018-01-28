@@ -1,7 +1,7 @@
 const crawlPatreons = require('./crawlPatreons')
 
 async function run (options) {
-  let patreons = await crawlPatreons(options)
+  let patreons = await crawlPatreons(options.cookie)
 
   for (let key in patreons) {
     patreons[key] = parsePatreons(patreons[key])

@@ -3,8 +3,8 @@ const fetch = require('node-fetch')
 const execall = require('execall')
 const cheerio = require('cheerio')
 
-async function crawlPatreons (options) {
-  const authFetch = await getAuthenticatedRequestHandler(options)
+async function crawlPatreons (cookie) {
+  const authFetch = await getAuthenticatedRequestHandler(cookie)
   const billingSchedules = await getBillingSchedules(authFetch)
 
   let patreons = {}
@@ -17,39 +17,8 @@ async function crawlPatreons (options) {
   return patreons
 }
 
-async function getAuthenticatedRequestHandler (options) {
-  const response = await fetch('https://www.patreon.com/api/login', {
-    method: 'POST',
-    body: JSON.stringify({
-      data: {
-        type: 'user',
-        attributes: {email: options.email, password: options.password}
-      }
-    })
-  })
-
-  // Check for errors
-  const content = await response.json()
-  if (content.errors) {
-    throw new Error(`Failed to log into patreon: (${content.errors[0].code_name}) ${content.errors[0].detail}`)
-  }
-
-  // Parse the cookie header into something usable
-  const cookies = response.headers._headers['set-cookie']
-    .map(cookie => cookie.replace(/^(.*?); .+$/, '$1'))
-    .map(cookie => {
-      cookie = cookie.split('=')
-      return {name: cookie[0], value: cookie[1]}
-    })
-
-  // Find the ssid and session_id cookies required for making authenticated requests
-  const ssid = cookies.find(cookie => cookie.name === 'patreon_device_id').value
-  const session_id = cookies.filter(cookie => cookie.name === 'session_id')[1].value
-  const cookie = `__ssid=${ssid}; session_id=${session_id}`
-  debug(`logged in with session cookie`, cookie)
-
-  // Build a wrapper function to send requests with
-  async function authenticatedRequest (url) {
+async function getAuthenticatedRequestHandler (cookie) {
+  return async function authenticatedRequest (url) {
     const response = await fetch(url, {
       method: 'GET',
       headers: {cookie: cookie}
@@ -57,8 +26,6 @@ async function getAuthenticatedRequestHandler (options) {
 
     return await response.text()
   }
-
-  return authenticatedRequest
 }
 
 async function getBillingSchedules (authFetch) {
