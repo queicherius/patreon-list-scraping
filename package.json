@@ -1,7 +1,7 @@
 {
   "name": "patreon-list-scraping",
   "description": "Programmatically get the current Patreons (names, mails, pledges) of your account",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "main": "src/index.js",
   "scripts": {
     "start": "DEBUG='patreon-list-scraping' node tests/index.js"
