@@ -66,10 +66,10 @@ async function parsePatreonTable (authFetch, href) {
 
     return {
       name: $(columns[1]).text().trim().split('\n')[0],
-      email: decodeEmail($(columns[2]).find('.__cf_email__').attr('data-cfemail')),
+      email: $(columns[2]).text().trim(),
       pledge: $(columns[3]).text().trim(),
       lifetime: $(columns[4]).text().trim(),
-      start: $(columns[7]).text().trim(),
+      start: $(columns[7]).text().trim()
     }
   })
 }

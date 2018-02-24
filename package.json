@@ -4,7 +4,7 @@
   "version": "3.0.0",
   "main": "src/index.js",
   "scripts": {
-    "start": "DEBUG='patreon-list-scraping' node tests/index.js"
+    "test": "DEBUG='patreon-list-scraping' node tests/index.js"
   },
   "license": "MIT",
   "dependencies": {
